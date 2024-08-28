@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "@discordjs/voice": "^0.17.0",
+    "axios": "^1.7.5",
     "chalk": "^4.1.2",
     "discord.js": "^14.11.0",
     "ffmpeg-static": "^5.2.0",
