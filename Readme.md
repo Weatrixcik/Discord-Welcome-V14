@@ -21,7 +21,7 @@ Bu proje, Discord sunucularında yeni katılan üyeleri sesli bir şekilde karş
     Bu projede kullanılan bağımlılıkları yüklemek için aşağıdaki komutu çalıştırın:
 
     ```bash
-    npm install discord.js @discordjs/voice chalk ffmpeg-static libsodium-wrappers
+    npm install discord.js @discordjs/voice chalk ffmpeg-static libsodium-wrappers axios
     ```
 
 2. **Konfigürasyon Dosyasını Oluşturun:**
