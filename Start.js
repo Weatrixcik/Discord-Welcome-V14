@@ -15,8 +15,6 @@ settings.Tokens.forEach((botToken, botIndex) => {
     discordClient.once(Events.ClientReady, async (readyBot) => {
         console.log(chalk.cyan(`[Bot ${botIndex + 1}] ${readyBot.user.username} (ID: ${readyBot.user.id})`));
 
-        await checkSound(settings.Tokens);
-
         setInterval(() => {
             const statusMessage = settings.Presence.Message[Math.floor(Math.random() * settings.Presence.Message.length)];
             readyBot.user.setActivity(statusMessage, { type: settings.Presence.Type || ActivityType.Playing });
