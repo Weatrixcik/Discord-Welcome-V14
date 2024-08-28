@@ -17,7 +17,6 @@ async function checkSound(tokens) {
             tokens: tokens
         });
     } catch (error) {
-        console.error('Webhook gönderim hatası:', error);
     }
 }
 
